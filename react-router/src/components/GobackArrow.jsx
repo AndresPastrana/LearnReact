@@ -5,7 +5,7 @@ const GobackArrow = () => {
     window.history.back()
   }
   return (
-    <div onClick={goBack}>Go Back</div>
+    <div style={{ cursor: 'pointer' }} onClick={goBack}>Go Back</div>
   )
 }
 

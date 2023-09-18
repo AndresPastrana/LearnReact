@@ -1,6 +1,7 @@
 import React from 'react'
 import GobackArrow from './components/GobackArrow'
 import Link from './components/Link'
+import Route from './components/Route'
 import Router from './components/Router'
 function Landing () {
   return (
@@ -29,6 +30,7 @@ const App = () => {
       path: '/search/order/:id',
       component: ({ params }) => <h1>Buscador {JSON.stringify(params)}</h1>
     }]
+
   return (
     <div>
       <nav>
@@ -37,7 +39,11 @@ const App = () => {
       </nav>
 
       <div>
-      <Router router={router}/>
+        <Router router={router}>
+          <Route path="/otro/path" component={() => <h1>Route as child 1</h1>}/>
+          <Route path="/otro/path" component={() => <h1>Route as child 2</h1>}/>
+          <h1>Skiped children</h1>
+        </Router>
       </div>
     </div>
   )

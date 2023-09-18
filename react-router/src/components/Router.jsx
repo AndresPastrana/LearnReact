@@ -1,11 +1,20 @@
+// TODO: prop types
+// TODO: We need to make sure that every route has a unique path
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo, Children } from 'react'
 import { match } from 'path-to-regexp'
-
 import { NAVIGATION } from '../const'
-const Router = ({ router, default: Default = () => <h1>Not Found</h1> }) => {
+
+const Router = ({ children, router, default: Default = () => <h1>Not Found</h1> }) => {
   const [currentPath, setcuerrentPath] = useState(window.location.pathname)
+  const routesFromChildren = useMemo(() => Children.map(children, (child, i) => {
+    const { name } = child?.type
+    if (name !== 'Route') return null // skip value
+    return child.props
+  }), [children])
+  const routes = useMemo(() => routesFromChildren.concat(router), [children, router])
   let params = {}
+
   useEffect(() => {
     const listenner = ({ target }) => {
       const { pathname } = target.location
@@ -21,19 +30,13 @@ const Router = ({ router, default: Default = () => <h1>Not Found</h1> }) => {
     }
   }, [])
 
-  // const dynamicSegments = {}
   // look for a path to match and returns the componet and undefine otherwise
-
-  const Page = router.find(({ path }) => {
-    console.log('Inside Find')
-    if (path === currentPath) return true
-
+  const Page = routes.find(({ path }) => {
     const urlMatch = match(path, { decode: decodeURIComponent }) // Take a path and returns a function
     const matched = urlMatch(currentPath)
     params = matched?.params
     return !!matched
   })?.component
-
   return Page ? <Page params={params}/> : <Default/>
 }
 
