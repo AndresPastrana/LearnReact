@@ -1,0 +1,9 @@
+{
+  "name": "LearnReactProjects",
+  "version": "1.0.0",
+  "description": "collection of react projects",
+  "main": "index.js",
+  "repository": "https://github.com/AndresPastrana/LearnReact.git",
+  "author": "AndresPastrana",
+  "license": "MIT"
+}
