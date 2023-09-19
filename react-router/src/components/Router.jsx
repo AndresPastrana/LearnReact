@@ -5,10 +5,10 @@ import React, { useState, useEffect, useMemo, Children } from 'react'
 import { match } from 'path-to-regexp'
 import { NAVIGATION } from '../const'
 
-const Router = ({ children, router, default: Default = () => <h1>Not Found</h1> }) => {
+const Router = ({ children = [], router = [], default: Default = () => <h1>Not Found</h1> }) => {
   const [currentPath, setcuerrentPath] = useState(window.location.pathname)
   const routesFromChildren = useMemo(() => Children.map(children, (child, i) => {
-    const { name } = child?.type
+    const name = child.type?.name ?? ''
     if (name !== 'Route') return null // skip value
     return child.props
   }), [children])
