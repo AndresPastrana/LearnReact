@@ -4,21 +4,22 @@
 import React, { useState, useEffect, useMemo, Children } from 'react'
 import { match } from 'path-to-regexp'
 import { NAVIGATION } from '../const'
+import { getCurrentLocation } from '../utils/utils'
 
-const Router = ({ children = [], router = [], default: Default = () => <h1>Not Found</h1> }) => {
-  const [currentPath, setcuerrentPath] = useState(window.location.pathname)
+const Router = ({ router = [], children = [], default: Default = () => <h1>404 Not Found</h1> }) => {
+  const [currentPath, setcuerrentPath] = useState(() => getCurrentLocation())
+
   const routesFromChildren = useMemo(() => Children.map(children, (child, i) => {
     const name = child.type?.name ?? ''
     if (name !== 'Route') return null // skip value
-    return child.props
+    return { ...child.props }
   }), [children])
-  const routes = useMemo(() => routesFromChildren.concat(router), [children, router])
+  const routes = useMemo(() => router.concat(routesFromChildren), [children, router])
   let params = {}
 
   useEffect(() => {
     const listenner = ({ target }) => {
-      const { pathname } = target.location
-      setcuerrentPath(pathname)
+      setcuerrentPath(getCurrentLocation())
     }
 
     window.addEventListener(NAVIGATION.PUSHSTATE, listenner)
