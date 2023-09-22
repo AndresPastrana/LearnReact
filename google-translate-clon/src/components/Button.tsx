@@ -1,13 +1,13 @@
-import React from 'react'
-
-const Button = ({onClick,Icon,...rest}) => {
+import {Button} from 'react-bootstrap'
+// interface Props{
+//   onClick: (any)=>void
+// }
+const BTN = ({onClick,Icon,...rest}) => {
   return (
-    <button style={{
-        border:"none",
-    }} onClick={onClick} {...rest}>
+    <Button variant='link' onClick={onClick} {...rest}>
         <Icon/>
-    </button>
+    </Button>
   )
 }
 
-export default Button
+export default BTN

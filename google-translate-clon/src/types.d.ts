@@ -10,7 +10,6 @@ type Action = {type :"SET_INPUT_TEXT", payload: string} |
               {type :"SET_FROM_LANGUAGE", payload: FromLangauge} |
               {type :"SET_TO_LANGUAGE", payload: Language} 
 
-
 interface State {
     inputText :string,
     outputText:string,
@@ -18,3 +17,7 @@ interface State {
     toLanguage : Language
 }
 
+export enum SectionType {
+    From ="from",
+    To = "to"
+}
