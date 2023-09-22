@@ -11,7 +11,7 @@ import { State,Action, FromLangauge, Language } from '../types';
 
 
 // Recives the initial state and an action
- const reducer =(state : State ,action: Action): State=>{
+export const reducer =(state : State ,action: Action): State=>{
      const {type} = action
      
      // TODO: Remove this logic to an object
