@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { State,Action } from '../types';
+import { State,Action, FromLangauge, Language } from '../types';
 
 
  const initialState : State = {
@@ -46,10 +46,15 @@ import { State,Action } from '../types';
 export const useTranslate = ()=>{
     const [state,dispatch] = useReducer(reducer,initialState)
     const {inputText,outputText,fromLanguage,toLanguage}= state
+    
 
+    // Functions that update the sate
     const setInputText =(payload: string)=> dispatch({type:"SET_INPUT_TEXT",payload}) 
     const setOutputText =(payload: string)=> dispatch({type:"SET_OUTPUT_TEXT",payload}) 
     const switchLanguages =()=> dispatch({type:"SWITCH_LANGUAGES"}) 
- 
-    return {inputText ,outputText,fromLanguage,toLanguage,setInputText,setOutputText,switchLanguages}
+    const setFromLanguage = (payload: FromLangauge)=> dispatch({type:"SET_FROM_LANGUAGE" ,payload})
+    const setToLanguage = (payload: Language)=> dispatch({type:"SET_FROM_LANGUAGE" ,payload})
+  
+  
+    return {inputText ,outputText,fromLanguage,toLanguage,setInputText,setOutputText,switchLanguages,setFromLanguage,setToLanguage}
 }
