@@ -7,7 +7,7 @@ type Props = {type: SectionType.From , value: FromLangauge, onChange: (payload: 
              {type: SectionType.To , value: Language, onChange: (payload: Language)=> void}
 
 
-const LanguageSelector: FC<Props> = ({ onChange, value,type }) => {
+const LanguageSelector: FC<Props> = ({ onChange, value,type,...rest }) => {
   const listOfLangauges = Object.entries(SUPPORTED_LANGUAGES);  
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
@@ -16,19 +16,18 @@ const LanguageSelector: FC<Props> = ({ onChange, value,type }) => {
   
 
   return (
-    <>
-     <Form.Select
+    <Form.Select
     aria-label="Default select example"
     onChange={handleChange}
     value={value}
+    {...rest}
     >
     {type === SectionType.From && <option value={AUTO_LANGUAGE}>Detectar Idioma</option>}
     {listOfLangauges.map(([key,literal])=>{
           return <option key={key} value={key}>{literal}</option>
     })}
     </Form.Select>
-    <p>{value}</p>
-    </>
+  
     
   );
 };

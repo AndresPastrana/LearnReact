@@ -53,7 +53,7 @@ export const useTranslate = ()=>{
     const setOutputText =(payload: string)=> dispatch({type:"SET_OUTPUT_TEXT",payload}) 
     const switchLanguages =()=> dispatch({type:"SWITCH_LANGUAGES"}) 
     const setFromLanguage = (payload: FromLangauge)=> dispatch({type:"SET_FROM_LANGUAGE" ,payload})
-    const setToLanguage = (payload: Language)=> dispatch({type:"SET_FROM_LANGUAGE" ,payload})
+    const setToLanguage = (payload: Language)=> dispatch({type:"SET_TO_LANGUAGE" ,payload})
   
   
     return {inputText ,outputText,fromLanguage,toLanguage,setInputText,setOutputText,switchLanguages,setFromLanguage,setToLanguage}
