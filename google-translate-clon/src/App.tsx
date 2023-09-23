@@ -1,11 +1,7 @@
-import { Col, Row, Form, Container } from "react-bootstrap";
-import LanguageSelector from "./components/LanguageSelector";
-import BTN from "./components/Button";
-import { SwitchIcon } from "./components/Icons";
-
+import { Col, Row, Container } from "react-bootstrap";
+import {LanguageSelector,TextArea,BTN,Icons} from './components/index'
 import { useTranslate } from "./hooks/useTranslate";
 import { SectionType } from "./types.d";
-
 const App = () => {
   const {
     inputText,
@@ -38,26 +34,13 @@ const App = () => {
           </Row>
           <Row>
             {/*Input Text  */}
-            <Form.Group
-              className="mb-3 mt-3 p-0"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Control
-                as="textarea"
-                value={inputText}
-                onChange={({ target }) => setInputText(target.value)}
-                rows={5}
-              />
-              <Form.Label className="ml-auto  mt-3 text-secondary">
-                Text to translate here
-              </Form.Label>
-            </Form.Group>
+            <TextArea type={SectionType.From} value={inputText} hanldeChange={setInputText}/>
           </Row>
         </Col>
         <Col className="col-2 d-flex justify-content-center mb-auto">
           <BTN
             className={fromLanguage === "auto" && "disabled"}
-            Icon={SwitchIcon}
+            Icon={Icons.SwitchIcon}
             onClick={switchLanguages}
           />
         </Col>
@@ -69,15 +52,7 @@ const App = () => {
           </Row>
           <Row>
             {/*Output Text  */}
-            <Form.Group
-              className="mb-3 mt-3 p-0"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Control as="textarea" disabled={true} rows={5} />
-              <Form.Label className="ml-auto  mt-3 text-secondary">
-                Translated text here
-              </Form.Label>
-            </Form.Group>
+           <TextArea value={outputText} type={SectionType.To} hanldeChange={setOutputText}/>
           </Row>
         </Col>
       </Row>

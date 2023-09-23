@@ -33,10 +33,12 @@ export const reducer =(state : State ,action: Action): State=>{
     }
 
     if (type==='SET_FROM_LANGUAGE') {
+        if (action.payload===state.toLanguage) return state
         return {...state,fromLanguage: action.payload}
     }
 
     if (type==='SET_TO_LANGUAGE') {
+        if (action.payload===state.fromLanguage) return state
         return {...state,toLanguage: action.payload}
     }
 

@@ -1,5 +1,5 @@
-import {beforeEach, describe,expect,it,vi } from 'vitest'
-import {State,Action, FromLangauge, Language} from '../src/types.d'
+import { describe,expect,it } from 'vitest'
+import {State, FromLangauge, Language} from '../src/types.d'
 import {reducer} from '../src/hooks/useTranslate'
 import { AUTO_LANGUAGE } from '../src/const';
 

@@ -2,7 +2,7 @@ import {Button} from 'react-bootstrap'
 // interface Props{
 //   onClick: (any)=>void
 // }
-const BTN = ({onClick,Icon,...rest}) => {
+export function BTN({onClick,Icon,...rest}) {
   return (
     <Button variant='link' onClick={onClick} {...rest}>
         <Icon/>
@@ -10,4 +10,3 @@ const BTN = ({onClick,Icon,...rest}) => {
   )
 }
 
-export default BTN

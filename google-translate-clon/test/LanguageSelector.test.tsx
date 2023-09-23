@@ -1,16 +1,14 @@
-// TODO: Should render the correct options depending of the type of the section
 import { describe, it, expect, vi, afterEach } from "vitest";
 import {
   render,
   screen,
   fireEvent,
   cleanup,
-  prettyDOM,
 } from "@testing-library/react";
 import React from "react";
 import { SectionType } from "../src/types.d";
 import { useTranslate } from "../src/hooks/useTranslate";
-import LanguageSelector from "../src/components/LanguageSelector";
+import {LanguageSelector}from'../src/components/index'
 import { SUPPORTED_LANGUAGES } from "../src/const";
 
 describe("Language Selector Component", () => {

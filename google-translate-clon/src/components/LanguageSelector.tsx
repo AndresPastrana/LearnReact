@@ -7,7 +7,7 @@ type Props = {type: SectionType.From , value: FromLangauge, onChange: (payload: 
              {type: SectionType.To , value: Language, onChange: (payload: Language)=> void}
 
 
-const LanguageSelector: FC<Props> = ({ onChange, value,type,...rest }) => {
+export const LanguageSelector: FC<Props> = ({ onChange, value,type,...rest }) => {
   const listOfLangauges = Object.entries(SUPPORTED_LANGUAGES);  
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
@@ -32,4 +32,4 @@ const LanguageSelector: FC<Props> = ({ onChange, value,type,...rest }) => {
   );
 };
 
-export default LanguageSelector;
+
