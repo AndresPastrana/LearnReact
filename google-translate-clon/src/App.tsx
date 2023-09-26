@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import {LanguageSelector,TextArea,BTN,Icons} from './components/index'
+import { useDefer } from "./hooks/useDefer";
 import { useTranslate } from "./hooks/useTranslate";
+import { getTranslatedText } from "./services/translate";
+// import { getTranslatedText } from "./services/translate";
 import { SectionType } from "./types.d";
+
 const App = () => {
+
   const {
     inputText,
     outputText,
@@ -13,8 +19,38 @@ const App = () => {
     switchLanguages,
     setFromLanguage,
     setToLanguage,
+    loading,
+    setLoading
   } = useTranslate();
+  const inputTextDefer = useDefer(inputText,1000)
+  
+   
+  useEffect(() => {
+        let abortController: AbortController ;  
+     // If no esta vacio
+     if (inputText) {
+      abortController = new AbortController()
+      const signal = abortController.signal   
+      getTranslatedText({fromLanguage,toLanguage,inputText},signal)
+     .then((text)=>{
+        setOutputText(text)
+      })
+      .catch((err)=>{
+        setOutputText("Error translating text")
+        console.log(err);
+        
+      }).finally( ()=>{
+        setLoading(false)
+      })
+        
+     }
 
+  
+    return () => {
+      if (abortController)abortController.abort() 
+    }
+  }, [inputTextDefer,fromLanguage,toLanguage])
+  
   return (
     <Container
       fluid
@@ -52,7 +88,7 @@ const App = () => {
           </Row>
           <Row>
             {/*Output Text  */}
-           <TextArea value={outputText} type={SectionType.To} hanldeChange={setOutputText}/>
+           <TextArea value={outputText} type={SectionType.To} hanldeChange={setOutputText} loading={loading}/>
           </Row>
         </Col>
       </Row>

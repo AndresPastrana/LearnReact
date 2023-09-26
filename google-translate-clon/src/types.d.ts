@@ -8,13 +8,19 @@ type Action = {type :"SET_INPUT_TEXT", payload: string} |
               {type :"SET_OUTPUT_TEXT", payload: string} |
               {type :"SWITCH_LANGUAGES"} |
               {type :"SET_FROM_LANGUAGE", payload: FromLangauge} |
-              {type :"SET_TO_LANGUAGE", payload: Language} 
-
+              {type :"SET_TO_LANGUAGE", payload: Language} |
+              {type :"SET_LOADING", payload: Boolean} 
+type RequestBody= {
+    fromLanguage: FromLangauge,
+    toLanguage : Language,
+    inputText : string
+}
 interface State {
     inputText :string,
     outputText:string,
     fromLanguage: FromLangauge,
-    toLanguage : Language
+    toLanguage : Language,
+    loading : Boolean
 }
 
 export enum SectionType {
